@@ -1,13 +1,15 @@
 # 🌿 EcoEscambo
 
-Plataforma de economia circular para trocas ecológicas. Um espaço dedicado a transformar o descarte em consumo consciente através da permuta direta de itens.
+Plataforma de economia circular que conecta pessoas para trocas ecológicas, promovendo o consumo consciente e o descarte zero.
 
-## 🔄 Fluxo de Troca
-* **Oferta:** Você cadastra os produtos que deseja trocar.
-* **Interesse:** Demonstre interesse em itens do catálogo.
-* **Match:** O proprietário analisa seu perfil e propõe uma troca mútua.
-* **Conclusão:** Após o aceite, o compromisso é selado e os itens são reservados.
-* **Confiança:** Sistema de avaliação mútua para garantir a qualidade das trocas.
+## 🔄 Como funciona
+* **Anuncie:** Cadastre os itens que você tem para ofertar.
+* **Interesse:** Explore o catálogo e demonstre interesse em produtos de outros usuários.
+* **Match:** O ofertante visualiza sua vitrine e, se houver interesse mútuo, propõe a troca.
+* **Acordo:** Com a proposta aceita, o compromisso é selado e os itens saem do catálogo.
+* **Avaliação:** Após a troca, os usuários se avaliam para fortalecer a confiança na rede.
 
-## 🍃 Objetivo
-Promover o descarte zero, conectando itens sem uso a novos interessados sob uma curadoria focada em sustentabilidade.
+## 🍃 Diferenciais
+* **Comunidade Ativa:** Qualquer usuário pode ser ofertante ou interessado.
+* **Consumo Colaborativo:** Trocas diretas baseadas na utilidade, sem valor monetário.
+* **Sustentabilidade:** Foco total na redução de resíduos e na economia circular.
