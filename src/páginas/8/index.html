@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoEscambo - Catálogo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#" class="nav-link active">Catálogo</a>
+      <span class="nav-separator">|</span>
+      <a href="#" class="nav-link">Meus Produtos</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <div class="filter-bar">
+      <span class="filter-label">Filtrar:</span>
+      <label class="radio-option">
+        <input type="radio" name="filtro" value="todos" checked />
+        <span class="radio-custom"></span>
+        Todos
+      </label>
+      <label class="radio-option">
+        <input type="radio" name="filtro" value="interessados" />
+        <span class="radio-custom"></span>
+        Só nos quais estou interessado
+      </label>
+    </div>
+
+    <ul class="product-list" id="productList">
+      <!-- produtos renderizados via JS -->
+    </ul>
+
+    <div class="pagination" id="pagination">
+      <!-- paginação renderizada via JS -->
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
