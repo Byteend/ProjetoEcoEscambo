@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styleCadastro.css" />
+    <title>Cadastrar Produto</title>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Cadastre novo produto</h2>
+
+      <form>
+        <label for="tituloP">Titulo breve:<br /></label>
+        <input
+          type="text"
+          name="titulo"
+          id="tituloP"
+          placeholder="Digite um titulo"
+        />
+        <br /><br />
+
+        <label for="descricaoP">Descrição:<br /></label>
+        <textarea
+          name="descricaoP"
+          id="descricaoP"
+          rows="4"
+          cols="50"
+          placeholder="Digite a descrição do produto aqui"
+        ></textarea>
+        <br /><br />
+
+        <label for="fotoP">Foto do produto</label><br />
+        <label for="fotoP" class="botao_file">Escolher foto</label>
+        <input type="file" id="fotoP" accept="image/*" />
+        <br /><br />
+
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </body>
+</html>
