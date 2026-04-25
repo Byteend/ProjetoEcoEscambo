@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #D8E7FD;
+}
+
+/* HEADER */
+header {
+  background-color: #799B45;
+  padding: 16px 32px;
+}
+
+.header-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.95rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  background-color: #D8E7FD;
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* SECTION / CARD */
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 680px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+/* PRODUTO */
+.produto {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.produto-img {
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+/* X placeholder para imagem */
+.produto-img::before,
+.produto-img::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 2px;
+  background-color: #aaa;
+}
+
+.produto-img::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.produto-img::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.produto-info strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.produto-info p {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #1a1a1a;
+  margin: 20px 0;
+}
+
+/* INTERESSADO */
+.interessado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.interessado label {
+  font-size: 0.95rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.interessado input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  color: #555;
+  background-color: #fff;
+  width: 180px;
+}
+
+/* BOTÕES */
+.acoes {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.btn-aceitar,
+.btn-recusar {
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-aceitar {
+  background-color: #013425;
+}
+
+.btn-recusar {
+  background-color: #F86812;
+}
+
+.btn-aceitar:hover,
+.btn-recusar:hover {
+  opacity: 0.85;
+}
+
+/* FOOTER */
+footer {
+  background-color: #799B45;
+  color: #ffffff;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoEscambo - Análise de Oferta</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <span class="logo">🌿 EcoEscambo</span>
+      <nav>
+        <a href="#">Início</a>
+        <a href="#">Minhas Trocas</a>
+        <a href="#">Perfil</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+
+      <h2>Meu produto</h2>
+      <div class="produto">
+        <div class="produto-img" aria-label="Imagem do produto"></div>
+        <div class="produto-info">
+          <strong>Título do Produto</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="interessado">
+        <label for="interessado">Interessado</label>
+        <input type="text" id="interessado" placeholder="Fulano" readonly />
+      </div>
+
+      <h2>Oferece troca por</h2>
+      <div class="produto">
+        <div class="produto-img" aria-label="Imagem do produto oferecido"></div>
+        <div class="produto-info">
+          <strong>Título do Produto</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button class="btn-aceitar" onclick="aceitar()">Aceitar</button>
+        <button class="btn-recusar" onclick="recusar()">Recusar</button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EcoEscambo. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
