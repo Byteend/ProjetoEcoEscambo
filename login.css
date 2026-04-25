@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Source Sans 3", sans-serif;
+}
+header{
+    background-color: #799B45;
+    height: 50px;
+    width: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container-main{
+    background-color: #D8E7FD;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-section{
+    background-color: #ffffff;
+    padding: 150px 40px;
+    border-radius: 20px;
+    width: 500px;
+    height: 525px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-section form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-section h1{
+    font-size: 40px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.container-section button{
+    background-color: #013425;
+    font-size: 20px;
+    color: #ffffff;
+    margin: 25px;
+    border-radius: 40px;
+    border: none;
+    height: 40px;
+    width: 140px;
+}
+.input-box{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-box label{
+    font-size: 27px;
+}
+.input-box input{
+    background-color: #D9D9D9;
+    border: none;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;    
+    width: 400px;
+    border-radius: 15px;
+}
+.registrar_link a{  
+    color: #F86812; 
+}
+.recuperar_senha_link{
+    margin: 4px;  
+}
+.recuperar_senha_link a{  
+    color: #F86812; 
+}
+footer{
+    background-color: #799B45;
+    height: 35px;
+    width: 100%;
+}
+
+/* =========================================
+                RESPONSIVIDADE
+   ========================================= */
+@media (max-width: 600px) {
+    .container-main {
+        padding: 20px; 
+    }
+    .container-section {
+        width: 100%;         
+        max-width: 400px;    
+        height: auto;        
+        padding: 50px 20px;  
+    }
+    .container-section form {
+        width: 100%;         
+    }
+    .input-box {
+        width: 100%;         
+    }
+    .input-box input {
+        width: 90%;          
+        font-size: 16px;     
+    }
+    .input-box label {
+        font-size: 22px;     
+    }
+    .container-section h1 {
+        font-size: 34px;     
+        margin-bottom: 20px;
+    }
+    .container-section button {
+        margin: 30px 0;      
+    }
+}
