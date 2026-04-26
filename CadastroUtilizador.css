@@ -79,6 +79,14 @@ main {
     background-color: #07281f;
 }
 
+input:invalid {
+    border: 2px solid #F86812;
+}
+
+input:valid {
+    border: 2px solid #0b3d2e;
+}
+
 /* Responsivo */
 @media (max-width: 480px) {
     .card {
