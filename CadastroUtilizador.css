@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estrutura */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header e Footer */
+header,
+footer {
+    height: 60px;
+    background-color: #799B45;
+}
+
+/* Área central */
+main {
+    flex: 1;
+    background-color: #a9b7c9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background-color: #e6e6e6;
+    padding: 35px 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Título */
+.formulario h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Labels */
+.formulario label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+/* Inputs */
+.formulario input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #cfcfcf;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+/* Botão */
+.formulario button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #0b3d2e;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.formulario button:hover {
+    background-color: #07281f;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .card {
+        padding: 25px 20px;
+    }
+
+    .formulario h1 {
+        font-size: 22px;
+    }
+}

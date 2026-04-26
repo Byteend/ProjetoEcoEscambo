@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estrutura */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header e Footer */
+header,
+footer {
+    height: 60px;
+    background-color: #799B45;
+}
+
+/* Área central */
+main {
+    flex: 1;
+    background-color: #a9b7c9;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background-color: #e6e6e6;
+    padding: 35px 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Título */
+.card h1 {
+    margin-bottom: 20px;
+}
+
+/* Produto principal */
+.produto-principal {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.img {
+    width: 90px;
+    height: 90px;
+    background-color: #cfcfcf;
+}
+
+/* Linha */
+hr {
+    margin: 15px 0;
+    border: 1px solid #333;
+}
+
+/* Interessados */
+.interessados {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.select-box {
+    display: flex;
+    align-items: center;
+    background-color: #cfcfcf;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.select-box input {
+    border: none;
+    padding: 8px;
+    background: transparent;
+    outline: none;
+}
+
+.seta {
+    background-color: #9fc3dd;
+    padding: 8px;
+}
+
+.qtd {
+    margin-left: auto;
+}
+
+/* Trocas */
+.trocas span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.info {
+    flex: 1;
+}
+
+.item button {
+    background-color: #8cc36f;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.item button:hover {
+    background-color: #6fa857;
+}
+
+/* Paginação */
+.paginacao {
+    text-align: center;
+    margin-top: 20px;
+    color: blue;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .produto-principal,
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item button {
+        width: 100%;
+    }
+
+    .interessados {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .qtd {
+        margin-left: 0;
+    }
+}
