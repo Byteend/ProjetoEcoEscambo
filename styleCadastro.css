@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #444;
+  background-color: #d8e7fd;
+  font-family: "Source Sans 3", sans-serif;
+
+  border-top: 40px solid #799b45;
+  border-bottom: 40px solid #799b45;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 800px;
+}
+
+label:not(.botao_file) {
+  font-size: 25px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  resize: none;
+}
+
+#fotoP {
+  display: none;
+}
+
+.botao_file {
+  margin-top: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #013425;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.botao_file:hover {
+  background-color: #799b45;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  background-color: #013425;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #799b45;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  .card {
+    max-width: 500px;
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    border-top: 20px solid #799b45;
+    border-bottom: 20px solid #799b45;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  label:not(.botao_file) {
+    font-size: 18px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
