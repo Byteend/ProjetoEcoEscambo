@@ -49,11 +49,11 @@ body{
     background-color: #013425;
     font-size: 20px;
     color: #ffffff;
-    margin: 35px;
+    margin: 25px;
     border-radius: 40px;
     border: none;
     height: 40px;
-    width: 180px;
+    width: 140px;
 }
 .input-box{
     padding: 15px;
@@ -70,15 +70,25 @@ body{
     font-size: 20px;
     text-align: center;
     padding: 5px;
-    margin: 15px;    
+    margin: 5px;    
     width: 400px;
     border-radius: 15px;
+}
+.registrar_link a{  
+    color: #F86812; 
+}
+.recuperar_senha_link{
+    margin: 4px;  
+}
+.recuperar_senha_link a{  
+    color: #F86812; 
 }
 footer{
     background-color: #799B45;
     height: 35px;
     width: 100%;
 }
+
 /* =========================================
                 RESPONSIVIDADE
    ========================================= */
@@ -87,30 +97,19 @@ footer{
         padding: 20px; 
     }
     .container-section {
-        width: 100%;         
-        max-width: 400px;    
-        height: auto;        
-        padding: 50px 20px;  
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        padding: 50px 20px;
     }
     .container-section form {
-        width: 100%;         
+        width: 100%;
     }
     .input-box {
-        width: 100%;         
+        width: 100%;
     }
     .input-box input {
-        width: 90%;          
-        font-size: 16px;     
-    }
-    .input-box label {
-        font-size: 22px;     
-    }
-    .container-section h1 {
-        font-size: 34px;     
-        margin-bottom: 20px;
-    }
-    .container-section button {
-        margin: 30px 0;      
+        width: 100%;
+        max-width: 300px;
     }
 }
-

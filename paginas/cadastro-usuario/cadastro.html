@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Utilizador</title>
-    <link rel="stylesheet" href="CadastroUtilizador.css">
+    <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
 
@@ -27,7 +27,9 @@
                 <label for="repitaSenha">Repita a Senha</label>
                 <input type="password" id="repitaSenha" placeholder="********" required>
 
-                <button type="submit">Cadastrar</button>
+                <button type="button" onclick="window.location.href='../login/login.html'">Cadastrar</button>
+                
+                <p class="login-link">Já possui conta? <a href="../login/login.html">Fazer login</a></p>
             </form>
         </div>
     </main>

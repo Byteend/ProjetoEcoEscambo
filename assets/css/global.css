@@ -1,0 +1,94 @@
+/* =========================================
+   VARIÁVEIS GLOBAIS DO PROJETO
+   ========================================= */
+
+:root {
+    /* Cores principais */
+    --verde-principal: #799B45;
+    --verde-escuro: #013425;
+    --verde-claro: #7b9c52;
+    --laranja: #F86812;
+    --laranja-claro: #d65b32;
+    
+    /* Cores de fundo */
+    --fundo-azul: #D8E7FD;
+    --fundo-cinza: #a9b7c9;
+    --fundo-branco: #ffffff;
+    --fundo-cinza-claro: #e6e6e6;
+    
+    /* Cores de texto */
+    --texto-principal: #333333;
+    --texto-secundario: #666666;
+    
+    /* Espaçamento */
+    --padding-pequeno: 10px;
+    --padding-medio: 20px;
+    --padding-grande: 40px;
+    
+    /* Bordas */
+    --border-radius-pequeno: 8px;
+    --border-radius-medio: 12px;
+    --border-radius-grande: 20px;
+}
+
+/* =========================================
+   RESET E ESTILOS BASE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--texto-principal);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* =========================================
+   UTILITÁRIOS
+   ========================================= */
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
+
+/* =========================================
+   HEADER E FOOTER PADRÃO
+   ========================================= */
+
+.header-padrao {
+    background-color: var(--verde-principal);
+    height: 50px;
+    width: 100%;
+}
+
+.footer-padrao {
+    background-color: var(--verde-principal);
+    height: 35px;
+    width: 100%;
+}

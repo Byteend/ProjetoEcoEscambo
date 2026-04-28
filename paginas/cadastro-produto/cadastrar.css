@@ -72,8 +72,9 @@ textarea {
   background-color: #799b45;
 }
 
-button {
+button[type="submit"] {
   margin-top: 20px;
+  margin-right: 10px;
   padding: 12px 24px;
   font-size: 16px;
   border-radius: 8px;
@@ -83,8 +84,22 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #799b45;
+}
+
+.btn-voltar {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  background-color: #6c757d;
+  cursor: pointer;
+}
+
+.btn-voltar:hover {
+  background-color: #5a6268;
 }
 
 @media (max-width: 768px) {
@@ -99,38 +114,9 @@ button:hover {
 
   h2 {
     font-size: 24px;
-    text-align: center;
   }
-
-  button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    border-top: 20px solid #799b45;
-    border-bottom: 20px solid #799b45;
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 20px;
-    text-align: center;
-  }
-
+  
   label:not(.botao_file) {
-    font-size: 18px;
-  }
-
-  input,
-  textarea {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 20px;
   }
 }

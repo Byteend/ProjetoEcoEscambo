@@ -87,6 +87,21 @@ input:valid {
     border: 2px solid #0b3d2e;
 }
 
+/* Link de login */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #F86812;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 /* Responsivo */
 @media (max-width: 480px) {
     .card {
