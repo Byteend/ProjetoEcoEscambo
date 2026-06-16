@@ -14,10 +14,10 @@ if (!$proposal){ http_response_code(404); json_response(['error'=>'Proposta não
 
 if ($proposal['interested_user_id'] != $_SESSION['user_id']){ http_response_code(403); json_response(['error'=>'Só o utilizador-interessado pode aceitar esta proposta']); }
 
-$stmt = $db->prepare('UPDATE proposals SET status = "accepted" WHERE id = :id');
+$stmt = $db->prepare("UPDATE proposals SET status = 'accepted' WHERE id = :id");
 $stmt->execute([':id'=>$proposalId]);
 
-$stmt = $db->prepare('UPDATE products SET status = "finalizada" WHERE id IN (:a, :b)');
+$stmt = $db->prepare("UPDATE products SET status = 'finalizada' WHERE id IN (:a, :b)");
 $stmt->bindValue(':a', $proposal['target_product_id'], PDO::PARAM_INT);
 $stmt->bindValue(':b', $proposal['ofertante_product_id'], PDO::PARAM_INT);
 $stmt->execute();

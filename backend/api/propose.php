@@ -23,6 +23,6 @@ $stmt->execute([':pid'=>$offeredProductId]);
 $owner2 = $stmt->fetchColumn();
 if ($owner2 != $interest['user_id']){ http_response_code(422); json_response(['error'=>'O produto proposto deve pertencer ao utilizador-interessado']); }
 
-$stmt = $db->prepare('INSERT INTO proposals (interest_id, ofertante_product_id, status) VALUES (:iid, :opid, "pending")');
+$stmt = $db->prepare("INSERT INTO proposals (interest_id, ofertante_product_id, status) VALUES (:iid, :opid, 'pending')");
 $stmt->execute([':iid'=>$interestId, ':opid'=>$offeredProductId]);
 json_response(['message'=>'Proposta registada com sucesso']);

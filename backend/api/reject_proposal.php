@@ -17,6 +17,6 @@ $stmt->execute([':iid'=>$proposal['interest_ref_id']]);
 $ofertante = $stmt->fetchColumn();
 if ($_SESSION['user_id'] != $proposal['interested_user_id'] && $_SESSION['user_id'] != $ofertante){ http_response_code(403); json_response(['error'=>'Sem permissão para rejeitar']); }
 
-$stmt = $db->prepare('UPDATE proposals SET status = "rejected" WHERE id = :id');
+$stmt = $db->prepare("UPDATE proposals SET status = 'rejected' WHERE id = :id");
 $stmt->execute([':id'=>$proposalId]);
 json_response(['message'=>'Proposta rejeitada']);

@@ -21,6 +21,6 @@ $title = trim($_POST['title'] ?? '');
 $description = trim($_POST['description'] ?? '');
 if ($title === ''){ http_response_code(422); json_response(['error'=>'Título obrigatório']); }
 
-$stmt = $db->prepare('INSERT INTO products (user_id, title, description, status, image) VALUES (:uid,:title,:desc,"aberto",:image)');
+$stmt = $db->prepare("INSERT INTO products (user_id, title, description, status, image) VALUES (:uid,:title,:desc,'aberto',:image)");
 $stmt->execute([':uid'=>$userId, ':title'=>$title, ':desc'=>$description, ':image'=>$_POST['image'] ?? null]);
 json_response(['message'=>'Produto criado','id'=>$db->lastInsertId()]);

@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     $stmt->execute([':uid'=>$userId]);
     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($items as &$it){
-        $stmt2 = $db->prepare('SELECT id,title,description FROM products WHERE user_id = :uid AND status = "aberto"');
+        $stmt2 = $db->prepare("SELECT id,title,description FROM products WHERE user_id = :uid AND status = 'aberto'");
         $stmt2->execute([':uid'=>$it['interested_user_id']]);
         $it['interested_user_products'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -8,7 +8,7 @@ $offset = ($page - 1) * $per;
 
 $uid = intval($_SESSION['user_id'] ?? 0);
 $interestedOnly = intval($_GET['interested'] ?? 0) === 1;
-$baseWhere = 'FROM products p JOIN users u ON p.user_id = u.id LEFT JOIN interests i ON i.product_id = p.id AND i.user_id = :uid WHERE p.status = "aberto"';
+$baseWhere = "FROM products p JOIN users u ON p.user_id = u.id LEFT JOIN interests i ON i.product_id = p.id AND i.user_id = :uid WHERE p.status = 'aberto'";
 if ($interestedOnly) {
     $baseWhere .= ' AND i.id IS NOT NULL';
 }
