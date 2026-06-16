@@ -31,16 +31,9 @@ if ($exists){
 }
 
 $hash = password_hash($password, PASSWORD_DEFAULT);
-$stmt = $db->prepare('INSERT INTO users (name, email, password, activated) VALUES (:name, :email, :password, 0)');
+$stmt = $db->prepare('INSERT INTO users (name, email, password, activated) VALUES (:name, :email, :password, 1)');
 $stmt->execute([':name'=>$name, ':email'=>$email, ':password'=>$hash]);
-$userId = $db->lastInsertId();
-
-$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-$activationLink = sprintf('%s://%s%s/backend/api/activate.php?id=%s', $scheme, $host, $base === '/' ? '' : $base, $userId);
 
 json_response([
-    'message' => 'Utilizador registrado com sucesso. Ative sua conta com o link enviado para seu e-mail.',
-    'activation_link' => $activationLink
+    'message' => 'Utilizador registrado com sucesso. Agora já pode efetuar login.'
 ]);

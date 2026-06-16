@@ -1,0 +1,44 @@
+<style>
+/* Navbar scoped styles to ensure they apply when injected */
+.site-navbar{background:linear-gradient(90deg,#799B45,#7b9c52);color:#fff;padding:10px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-family:Segoe UI, Tahoma, sans-serif}
+.site-navbar .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.site-navbar .brand{font-weight:700;color:#fff;font-size:20px;display:flex;align-items:center;gap:10px}
+.site-navbar .brand .logo{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);display:inline-block}
+.site-navbar .nav-links a{color:rgba(255,255,255,0.95);margin-left:12px;padding:8px 10px;border-radius:8px}
+.site-navbar .nav-links a:hover{background:rgba(255,255,255,0.06)}
+.site-navbar .nav-links a.active{background:rgba(255,255,255,0.12)}
+@media(max-width:720px){.site-navbar .nav-links{display:none}}
+</style>
+
+<nav class="site-navbar">
+    <div class="nav-inner">
+        <a class="brand" href="/"><span class="logo"></span>EcoEscambo</a>
+        <div class="nav-links">
+            <a href="/paginas/catalogo/catalogo.html">Catálogo</a>
+            <a href="/paginas/meus-produtos/meusProdutos.html">Meus Produtos</a>
+            <a href="/paginas/cadastro-produto/cadastrar.html">Cadastrar Produto</a>
+            <a href="/paginas/ofertas-recebidas/ofertas.html">Ofertas</a>
+            <a href="/paginas/login/login.html" id="nav-login">Login</a>
+            <a href="#" id="nav-logout" style="display:none;">Logout</a>
+        </div>
+    </div>
+</nav>
+<script>
+
+async function checkAuthNav(){
+    try{
+        const res = await fetch('/backend/api/my_products.php', { credentials: 'same-origin' });
+        if (res.ok){
+            document.getElementById('nav-login').style.display = 'none';
+            const logout = document.getElementById('nav-logout');
+            logout.style.display = 'inline-block';
+            logout.addEventListener('click', async (e)=>{
+                e.preventDefault();
+                await fetch('/backend/api/logout.php', { method: 'POST', credentials: 'same-origin' });
+                window.location.href = '/paginas/login/login.html';
+            });
+        }
+    }catch(e){}
+}
+checkAuthNav();
+</script>

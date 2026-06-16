@@ -7,38 +7,66 @@
     <title>Cadastrar Produto</title>
   </head>
   <body>
+    <div id="site-navbar"></div>
+    <script src="/assets/js/navbar.js"></script>
     <div class="card">
       <h2>Cadastre novo produto</h2>
 
-      <form>
-        <label for="tituloP">Titulo breve:<br /></label>
+      <form id="productForm">
+        <label for="tituloP">Título breve:<br /></label>
         <input
           type="text"
-          name="titulo"
+          name="title"
           id="tituloP"
-          placeholder="Digite um titulo"
+          required
         />
         <br /><br />
 
         <label for="descricaoP">Descrição:<br /></label>
         <textarea
-          name="descricaoP"
+          name="description"
           id="descricaoP"
           rows="4"
           cols="50"
-          placeholder="Digite a descrição do produto aqui"
+          required
         ></textarea>
         <br /><br />
 
-        <label for="fotoP">Foto do produto</label><br />
-        <label for="fotoP" class="botao_file">Escolher foto</label>
-        <input type="file" id="fotoP" accept="image/*" />
-        <br /><br />
+        <div id="productMessage" class="form-message"></div>
 
-        <button type="button" onclick="window.location.href='../meus-produtos/meusProdutos.html'">Salvar</button>
+        <button type="submit">Salvar</button>
         
         <button type="button" class="btn-voltar" onclick="window.location.href='../meus-produtos/meusProdutos.html'">Voltar</button>
       </form>
+      <script>
+        document.getElementById('productForm').addEventListener('submit', async function(event){
+          event.preventDefault();
+          const message = document.getElementById('productMessage');
+          message.textContent = '';
+          const data = new URLSearchParams(new FormData(event.currentTarget));
+          try {
+            const response = await fetch('/backend/api/my_products.php', {
+              method: 'POST',
+              body: data,
+              credentials: 'same-origin'
+            });
+            const result = await response.json();
+            if (!response.ok) {
+              message.textContent = result.error || 'Erro ao cadastrar produto.';
+              message.style.color = 'red';
+              return;
+            }
+            message.textContent = result.message || 'Produto cadastrado com sucesso.';
+            message.style.color = 'green';
+            setTimeout(() => {
+              window.location.href = '../meus-produtos/meusProdutos.html';
+            }, 800);
+          } catch (err) {
+            message.textContent = 'Erro de rede. Tente novamente.';
+            message.style.color = 'red';
+          }
+        });
+      </script>
     </div>
   </body>
 </html>

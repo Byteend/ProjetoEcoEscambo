@@ -10,24 +10,55 @@
     <header>
         
     </header>
+    <div id="site-navbar"></div>
+    <script src="/assets/js/navbar.js"></script>
     <main class="container-main">
         <section class="container-section">
             <h1>autenticação</h1>
-            <form action="/backend/api/login.php" method="post">
+            <form id="loginForm">
                 <div class="input-box">
                     <label>email</label>
-                    <input type="email" id="txt_email" name="email">
+                    <input type="email" id="txt_email" name="email" required>
                 </div>
                 <div class="input-box">
                     <label>senha</label>
-                    <input type="password" id="txt_senha" name="password">
+                    <input type="password" id="txt_senha" name="password" required>
                 </div> 
                 
                 <button type="submit">login</button>
+                <div id="loginMessage" class="form-message"></div>
 
                 <div class="recuperar_senha_link">esqueceu a senha? <a href="../recuperar-senha/recuperar.html">recuperar senha</a></div>
                 <div class="registrar_link">Não possui conta? <a href="../cadastro-usuario/cadastro.html">cadastrar</a></div>
             </form>
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', async function(event){
+                    event.preventDefault();
+                    const form = event.currentTarget;
+                    const message = document.getElementById('loginMessage');
+                    message.textContent = '';
+                    const data = new URLSearchParams(new FormData(form));
+                    try {
+                        const response = await fetch('/backend/api/login.php', {
+                            method: 'POST',
+                            body: data,
+                            credentials: 'same-origin'
+                        });
+                        const result = await response.json();
+                        if (!response.ok) {
+                            message.textContent = result.error || 'Erro ao autenticar';
+                            message.style.color = 'red';
+                            return;
+                        }
+                        message.textContent = result.message || 'Login efetuado com sucesso';
+                        message.style.color = 'green';
+                        window.location.href = '../catalogo/catalogo.html';
+                    } catch (err) {
+                        message.textContent = 'Erro de rede. Tente novamente.';
+                        message.style.color = 'red';
+                    }
+                });
+            </script>
         </section>
     </main>
     <footer>

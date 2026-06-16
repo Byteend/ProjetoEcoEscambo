@@ -10,6 +10,9 @@
 
     <div class="banner-verde"></div>
 
+    <div id="site-navbar"></div>
+    <script src="/assets/js/navbar.js"></script>
+
     <main>
         <div class="card">
             <div class="header-catalogo">
@@ -29,33 +32,68 @@
                 </label>
             </div>
 
-            <div class="produto-lista">
-                
-                <div class="produto-item">
-                    <div class="produto-imagem"></div>
-                    <div class="produto-info">
-                        <h3>Título do Produto</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="acoes-produto acoes-empilhadas">
-                        <button class="btn btn-perigo">Excluir</button>
-                        <button class="btn btn-principal" onclick="window.location.href='../ofertas-recebidas/ofertas.html'">Ver interesses</button>
-                    </div>
-                </div>
+            <div class="produto-lista" id="myProducts"></div>
+            <div id="myProductsEmpty" class="empty-message" style="display:none; text-align:center; padding:24px; color:#555;">Nenhum produto cadastrado.</div>
+            <div class="paginacao" id="myProductsPagination"></div>
+            <script>
+                const myPerPage = 6;
+                let myCurrent = 1;
+                let myItems = [];
+                async function loadMyProducts(page = 1){
+                    myCurrent = page;
+                    const container = document.getElementById('myProducts');
+                    const empty = document.getElementById('myProductsEmpty');
+                    const pagination = document.getElementById('myProductsPagination');
+                    container.innerHTML = '';
+                    pagination.innerHTML = '';
+                    try {
+                        const response = await fetch('/backend/api/my_products.php', { credentials: 'same-origin' });
+                        if (!response.ok) {
+                            const error = await response.json().catch(() => null);
+                            empty.style.display = 'block';
+                            empty.textContent = error?.error || 'Erro ao carregar seus produtos.';
+                            return;
+                        }
+                        myItems = await response.json();
+                        if (!myItems.length) { empty.style.display = 'block'; return; }
+                        empty.style.display = 'none';
+                        const pages = Math.max(1, Math.ceil(myItems.length / myPerPage));
+                        const start = (page-1)*myPerPage;
+                        const pageItems = myItems.slice(start, start + myPerPage);
+                        pageItems.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'produto-item';
+                            div.innerHTML = `
+                                <div class="produto-imagem"></div>
+                                <div class="produto-info">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.description || ''}</p>
+                                </div>
+                                <div class="acoes-produto acoes-empilhadas">
+                                    <button class="btn btn-principal" onclick="window.location.href='../ofertas-recebidas/ofertas.html'">Ver interesses</button>
+                                </div>
+                            `;
+                            container.appendChild(div);
+                        });
 
-                <div class="produto-item">
-                    <div class="produto-imagem"></div>
-                    <div class="produto-info">
-                        <h3>Título do Produto</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div class="acoes-produto">
-                        <button class="btn btn-secundario">Editar</button>
-                        <button class="btn btn-perigo">Excluir</button>
-                    </div>
-                </div>
+                        // pagination
+                        function mkLink(p, text, cls){
+                            const a = document.createElement('a');
+                            a.href = '#'; a.textContent = text || p; if (cls) a.className = cls;
+                            a.addEventListener('click', (e)=>{ e.preventDefault(); loadMyProducts(p); });
+                            return a;
+                        }
+                        pagination.appendChild(mkLink(Math.max(1,myCurrent-1), '« Prev', myCurrent===1?'disabled':''));
+                        for(let p=1;p<=pages;p++) pagination.appendChild(mkLink(p,p,p===myCurrent?'active':''));
+                        pagination.appendChild(mkLink(Math.min(pages,myCurrent+1), 'Next »', myCurrent===pages?'disabled':''));
 
-            </div>
+                    } catch (err) {
+                        empty.style.display = 'block';
+                        empty.textContent = 'Erro ao carregar seus produtos.';
+                    }
+                }
+                loadMyProducts();
+            </script>
 
             <div class="paginacao">
                 <a href="#">&lt;&lt; Prev</a>

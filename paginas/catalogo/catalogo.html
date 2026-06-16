@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <div id="site-navbar"></div>
+    <script src="/assets/js/navbar.js"></script>
+
     <div class="banner-verde"></div>
 
     <main>
@@ -29,50 +32,111 @@
                 </label>
             </div>
 
-            <div class="produto-lista">
-                
-                <div class="produto-item">
-                    <div class="produto-imagem"></div>
-                    <div class="produto-info">
-                        <h3>Título do Produto</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <button class="btn btn-interesse">Tenho interesse</button>
-                </div>
+            <div class="produto-lista" id="catalogProducts"></div>
+            <div id="catalogEmpty" class="empty-message" style="display:none; text-align:center; padding:24px; color:#555;">Nenhum produto encontrado.</div>
+            <div class="paginacao" id="catalogPagination"></div>
+            <script>
+                const urlParams = new URLSearchParams(location.search);
+                let currentPage = parseInt(urlParams.get('page') || '1', 10) || 1;
+                const perPage = parseInt(urlParams.get('per_page') || '10', 10) || 10;
 
-                <div class="produto-item">
-                    <div class="produto-imagem"></div>
-                    <div class="produto-info">
-                        <h3>Título do Produto</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <button class="btn btn-remover">Tirar Interesse</button>
-                </div>
+                async function loadCatalog(page = 1){
+                    currentPage = page;
+                    const container = document.getElementById('catalogProducts');
+                    const empty = document.getElementById('catalogEmpty');
+                    const pagination = document.getElementById('catalogPagination');
+                    container.innerHTML = '';
+                    pagination.innerHTML = '';
+                    try {
+                        const response = await fetch(`/backend/api/products.php?page=${page}&per_page=${perPage}`, { credentials: 'same-origin' });
+                        if (!response.ok) throw new Error('Falha ao carregar catálogo');
+                        const result = await response.json();
+                        const items = result.items || [];
+                        const total = parseInt(result.total || 0, 10);
+                        if (!items.length) {
+                            empty.style.display = 'block';
+                            return;
+                        }
+                        empty.style.display = 'none';
+                        items.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'produto-item';
+                            const isInterested = !!item.interest_id;
+                            div.innerHTML = `
+                                <div class="produto-imagem"></div>
+                                <div class="produto-info">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.description || ''}</p>
+                                    <small>Ofertante: ${item.user_name || ''}</small>
+                                </div>
+                                <div class="acoes-produto">
+                                    <button class="btn btn-interesse">${isInterested ? 'Remover interesse' : 'Tenho interesse'}</button>
+                                </div>
+                            `;
+                            const btn = div.querySelector('button');
+                            btn.addEventListener('click', async () => {
+                                try {
+                                    if (isInterested){
+                                        const res = await fetch('/backend/api/remove_interest.php', {
+                                            method: 'POST',
+                                            body: new URLSearchParams({ product_id: item.id }),
+                                            credentials: 'same-origin'
+                                        });
+                                        const data = await res.json();
+                                        if (!res.ok) throw new Error(data.error || 'Erro');
+                                        alert(data.message || 'Interesse removido');
+                                        loadCatalog(currentPage);
+                                    } else {
+                                        const res = await fetch('/backend/api/interest.php', {
+                                            method: 'POST',
+                                            body: new URLSearchParams({ product_id: item.id }),
+                                            credentials: 'same-origin'
+                                        });
+                                        const data = await res.json();
+                                        if (!res.ok) throw new Error(data.error || 'Erro');
+                                        alert(data.message || 'Interesse registrado com sucesso.');
+                                        loadCatalog(currentPage);
+                                    }
+                                } catch (err) {
+                                    alert(err.message || 'Falha na operação.');
+                                }
+                            });
+                            container.appendChild(div);
+                        });
 
-                <div class="produto-item">
-                    <div class="produto-imagem"></div>
-                    <div class="produto-info">
-                        <h3>Título do Produto</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <button class="btn btn-interesse">Tenho interesse</button>
-                </div>
+                        // build pagination
+                        const pages = Math.max(1, Math.ceil(total / perPage));
+                        function mkLink(p, text, cls){
+                            const a = document.createElement('a');
+                            a.href = '#';
+                            a.textContent = text || p;
+                            if (cls) a.className = cls;
+                            a.addEventListener('click', (e)=>{ e.preventDefault(); loadCatalog(p); });
+                            return a;
+                        }
+                        // prev
+                        pagination.appendChild(mkLink(Math.max(1,currentPage-1), '« Prev', currentPage===1?'disabled':''));
+                        // page numbers (show limited window)
+                        const windowSize = 5;
+                        let start = Math.max(1, currentPage - Math.floor(windowSize/2));
+                        let end = Math.min(pages, start + windowSize -1);
+                        if (end - start < windowSize -1) start = Math.max(1, end - windowSize +1);
+                        for(let p = start; p <= end; p++){
+                            pagination.appendChild(mkLink(p, p, p===currentPage?'active':''));
+                        }
+                        // next
+                        pagination.appendChild(mkLink(Math.min(pages,currentPage+1), 'Next »', currentPage===pages?'disabled':''));
 
-            </div>
+                    } catch (err) {
+                        empty.style.display = 'block';
+                        empty.textContent = 'Erro ao carregar catálogo.';
+                    }
+                }
+                loadCatalog(currentPage);
+            </script>
 
             <div class="paginacao">
-                <a href="#">&lt;&lt; Prev</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
-                <a href="#">Next &gt;&gt;</a>
+                <!-- visual fallback rendered by script -->
             </div>
         </div>
     </main>

@@ -7,79 +7,148 @@
     <link rel="stylesheet" href="ofertas.css">
 </head>
 <body>
-
+    <div id="site-navbar"></div>
+    <script src="/assets/js/navbar.js"></script>
 <header></header>
-
 <main>
     <div class="card">
-
         <h1>Meu produto</h1>
-
-        <!-- Produto principal -->
-        <div class="produto-principal">
+        <div class="produto-principal" id="mainProduct">
             <div class="img"></div>
             <div>
-                <h3>Título do Produto</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h3 id="mainProductTitle">Carregando...</h3>
+                <p id="mainProductDescription">Aguarde enquanto buscamos as ofertas para o seu produto.</p>
             </div>
         </div>
 
         <hr>
 
         <div class="interessados">
-            <span>Interessado</span>
-
+            <span>Interessados</span>
             <div class="select-box">
-                <input type="text" placeholder="Beltrano">
+                <input type="text" id="interestedFilter" placeholder="Buscar interessado">
                 <div class="seta">▼</div>
             </div>
-
-            <span class="qtd">3 interessados</span>
+            <span class="qtd" id="interestedCount">0 interessados</span>
         </div>
 
-        <div class="trocas">
-            <span>Aceito troca por</span>
+        <div id="interestedList" class="trocas"></div>
+        <div id="interestedEmpty" class="empty-message" style="display:none; text-align:center; padding:24px; color:#555;">Nenhum interessado encontrado.</div>
 
-            <div class="item">
-                <div class="img"></div>
-                <div class="info">
-                    <h3>Título do Produto</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                </div>
-                <button>Propor</button>
-            </div>
-
-            <div class="item">
-                <div class="img"></div>
-                <div class="info">
-                    <h3>Título do Produto</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                </div>
-                <button>Propor</button>
-            </div>
-
-            <div class="item">
-                <div class="img"></div>
-                <div class="info">
-                    <h3>Título do Produto</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                </div>
-                <button>Propor</button>
-            </div>
-        </div>
-
-        <div class="paginacao">
-            &lt;&lt; Prev 1 2 3 4 5 6 7 8 9 10 Next &gt;&gt;
-        </div>
-        
         <div class="footer-card">
             <button class="btn-voltar" onclick="window.location.href='../meus-produtos/meusProdutos.html'">Voltar</button>
         </div>
-
     </div>
 </main>
-
 <footer></footer>
+<script>
+    let allInterests = [];
+    const mainProduct = document.getElementById('mainProduct');
+    const mainTitle = document.getElementById('mainProductTitle');
+    const mainDescription = document.getElementById('mainProductDescription');
+    const interestedList = document.getElementById('interestedList');
+    const interestedEmpty = document.getElementById('interestedEmpty');
+    const interestedCount = document.getElementById('interestedCount');
+    const filterInput = document.getElementById('interestedFilter');
 
+    function renderInterests(items) {
+        interestedList.innerHTML = '';
+        if (!items.length) {
+            interestedEmpty.style.display = 'block';
+            interestedCount.textContent = '0 interessados';
+            return;
+        }
+        interestedEmpty.style.display = 'none';
+        interestedCount.textContent = `${items.length} interessado${items.length === 1 ? '' : 's'}`;
+        items.forEach(interest => {
+            const item = document.createElement('div');
+            item.className = 'item';
+            const productsHtml = interest.interested_user_products.map(product => `
+                <div class="item" style="margin:8px 0;">
+                    <div class="img"></div>
+                    <div class="info">
+                        <h3>${product.title}</h3>
+                        <p>${product.description || ''}</p>
+                    </div>
+                    <button type="button">Propor</button>
+                </div>
+            `).join('');
+            item.innerHTML = `
+                <div class="info">
+                    <h3>${interest.interested_name}</h3>
+                    <p>Produto do interessado: ${interest.target_title}</p>
+                </div>
+                <button type="button" class="btn-propor">Ver produtos do interessado</button>
+                <div class="interested-products" style="display:none; margin-top:12px;">${productsHtml}</div>
+            `;
+            const toggle = item.querySelector('.btn-propor');
+            const productsDiv = item.querySelector('.interested-products');
+            toggle.addEventListener('click', () => {
+                const visible = productsDiv.style.display === 'block';
+                productsDiv.style.display = visible ? 'none' : 'block';
+                toggle.textContent = visible ? 'Ver produtos do interessado' : 'Ocultar produtos';
+            });
+            productsDiv.querySelectorAll('button').forEach((button, index) => {
+                button.addEventListener('click', async () => {
+                    const product = interest.interested_user_products[index];
+                    try {
+                        const response = await fetch('/backend/api/propose.php', {
+                            method: 'POST',
+                            credentials: 'same-origin',
+                            body: new URLSearchParams({
+                                interest_id: interest.interest_id,
+                                offered_product_id: product.id
+                            })
+                        });
+                        const result = await response.json();
+                        if (!response.ok) throw new Error(result.error || 'Erro ao propor troca');
+                        alert(result.message || 'Proposta enviada com sucesso');
+                    } catch (err) {
+                        alert(err.message || 'Falha ao enviar proposta');
+                    }
+                });
+            });
+            interestedList.appendChild(item);
+        });
+    }
+
+    async function loadOffersReceived(){
+        try {
+            const response = await fetch('/backend/api/offers_received.php', {
+                credentials: 'same-origin'
+            });
+            if (!response.ok) {
+                const result = await response.json().catch(() => null);
+                mainTitle.textContent = 'Erro ao carregar ofertas';
+                mainDescription.textContent = result?.error || 'Não foi possível carregar os interesses.';
+                return;
+            }
+            const items = await response.json();
+            allInterests = items;
+            if (items.length) {
+                const product = items[0];
+                mainTitle.textContent = product.target_title;
+                mainDescription.textContent = product.target_title ? `Interesse no produto: ${product.target_title}` : 'Produto principal do qual você recebeu interesses.';
+            } else {
+                mainTitle.textContent = 'Nenhum interesse recebido';
+                mainDescription.textContent = 'Ainda não há interessados em seus produtos.';
+            }
+            renderInterests(items);
+        } catch (err) {
+            mainTitle.textContent = 'Erro de conexão';
+            mainDescription.textContent = 'Não foi possível carregar os dados. Tente novamente.';
+            interestedEmpty.style.display = 'block';
+            interestedEmpty.textContent = 'Erro ao carregar os interessados.';
+        }
+    }
+
+    filterInput.addEventListener('input', () => {
+        const term = filterInput.value.trim().toLowerCase();
+        const filtered = allInterests.filter(item => item.interested_name.toLowerCase().includes(term));
+        renderInterests(filtered);
+    });
+
+    loadOffersReceived();
+</script>
 </body>
 </html>
