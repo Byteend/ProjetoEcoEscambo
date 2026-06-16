@@ -22,16 +22,6 @@
                 </div>
             </div>
 
-            <div class="filtros">
-                <span>Filtrar:</span>
-                <label>
-                    <input type="radio" name="filtro" checked> Todos
-                </label>
-                <label>
-                    <input type="radio" name="filtro"> Só nos quais há interessados
-                </label>
-            </div>
-
             <div class="produto-lista" id="myProducts"></div>
             <div id="myProductsEmpty" class="empty-message" style="display:none; text-align:center; padding:24px; color:#555;">Nenhum produto cadastrado.</div>
             <div class="paginacao" id="myProductsPagination"></div>
@@ -49,6 +39,10 @@
                     try {
                         const response = await fetch('/backend/api/my_products.php', { credentials: 'same-origin' });
                         if (!response.ok) {
+                            if (response.status === 401) {
+                                window.location.href = '/paginas/login/login.html';
+                                return;
+                            }
                             const error = await response.json().catch(() => null);
                             empty.style.display = 'block';
                             empty.textContent = error?.error || 'Erro ao carregar seus produtos.';
@@ -94,21 +88,6 @@
                 }
                 loadMyProducts();
             </script>
-
-            <div class="paginacao">
-                <a href="#">&lt;&lt; Prev</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
-                <a href="#">8</a>
-                <a href="#">9</a>
-                <a href="#">10</a>
-                <a href="#">Next &gt;&gt;</a>
-            </div>
 
             <div class="footer-card">
                 <button class="btn btn-principal btn-cadastrar-novo" onclick="window.location.href='../cadastro-produto/cadastrar.html'">Cadastrar Novo</button>

@@ -46,95 +46,122 @@ main {
 .produto-principal {
     display: flex;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    align-items: center;
 }
 
 .img {
     width: 90px;
     height: 90px;
     background-color: #cfcfcf;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+.produto-principal h3 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.interessados-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.section-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #333;
+}
+
+.qtd {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.interested-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.interest-card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 18px;
+}
+
+.interest-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.interest-user h3 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+
+.interest-user p {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.btn-view-items,
+.btn-voltar {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    background-color: #0b3d2e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-view-items:hover,
+.btn-voltar:hover {
+    background-color: #07281f;
+}
+
+.interest-products {
+    margin-top: 18px;
+    display: grid;
+    gap: 12px;
+}
+
+.product-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 14px;
+    background-color: #f7f7f7;
+}
+
+.product-card .info h4 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+}
+
+.product-card .info p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.no-products {
+    color: #6d6d6d;
+    font-size: 0.95rem;
 }
 
 /* Linha */
 hr {
-    margin: 15px 0;
-    border: 1px solid #333;
-}
-
-/* Interessados */
-.interessados {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.select-box {
-    display: flex;
-    align-items: center;
-    background-color: #cfcfcf;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.select-box input {
-    border: none;
-    padding: 8px;
-    background: transparent;
-    outline: none;
-}
-
-.seta {
-    background-color: #9fc3dd;
-    padding: 8px;
-}
-
-.qtd {
-    margin-left: auto;
-}
-
-/* Trocas */
-.trocas span {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.trocas .item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-}
-
-.trocas .info {
-    flex: 1;
-}
-
-.trocas .info h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.trocas .info p {
-    font-size: 0.85rem;
-    color: #666;
-}
-
-.trocas button {
-    padding: 8px 16px;
-    background-color: #0b3d2e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.trocas button:hover {
-    background-color: #07281f;
+    display: none;
 }
 
 /* Paginação */

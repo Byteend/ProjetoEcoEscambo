@@ -25,10 +25,10 @@
             <div class="filtros">
                 <span>Filtrar:</span>
                 <label>
-                    <input type="radio" name="filtro" checked> Todos
+                    <input type="radio" name="filtro" value="0" id="filterAll" checked> Todos
                 </label>
                 <label>
-                    <input type="radio" name="filtro"> Só nos quais estou interessado
+                    <input type="radio" name="filtro" value="1" id="filterInterested"> Só nos quais estou interessado
                 </label>
             </div>
 
@@ -39,6 +39,13 @@
                 const urlParams = new URLSearchParams(location.search);
                 let currentPage = parseInt(urlParams.get('page') || '1', 10) || 1;
                 const perPage = parseInt(urlParams.get('per_page') || '10', 10) || 10;
+                const filterAll = document.getElementById('filterAll');
+                const filterInterested = document.getElementById('filterInterested');
+                function getFilterParam(){
+                    return filterInterested.checked ? '&interested=1' : '';
+                }
+                filterAll.addEventListener('change', ()=> loadCatalog(1));
+                filterInterested.addEventListener('change', ()=> loadCatalog(1));
 
                 async function loadCatalog(page = 1){
                     currentPage = page;
@@ -48,7 +55,7 @@
                     container.innerHTML = '';
                     pagination.innerHTML = '';
                     try {
-                        const response = await fetch(`/backend/api/products.php?page=${page}&per_page=${perPage}`, { credentials: 'same-origin' });
+                        const response = await fetch(`/backend/api/products.php?page=${page}&per_page=${perPage}${getFilterParam()}`, { credentials: 'same-origin' });
                         if (!response.ok) throw new Error('Falha ao carregar catálogo');
                         const result = await response.json();
                         const items = result.items || [];

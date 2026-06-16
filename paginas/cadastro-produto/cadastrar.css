@@ -15,10 +15,20 @@ body {
   border-bottom: 40px solid #799b45;
 
   min-height: 100vh;
+  display: block;
+  padding: 20px 0 40px;
+}
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.card {
+  margin: 100px auto 0;
 }
 
 h2 {
